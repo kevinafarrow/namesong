@@ -20,6 +20,24 @@ def message_string(message, level, tabs=4, status='none'):
     x['color'] = color[status]
     print(tm.render({**x, 'reset': Fore.RESET}))
 
+def colorize_string(input, status='none'):
+    color = {
+        "success": Fore.GREEN,
+        "green": Fore.GREEN,
+        "error": Fore.RED,
+        "red": Fore.RED,
+        "attention": Fore.CYAN,
+        "cyan": Fore.CYAN,
+        "none": Fore.RESET,
+        "yellow": Fore.YELLOW,
+        "magenta": Fore.MAGENTA,
+    }
+    tm = Template("{{ color }}{{ input }}{{ reset }}")
+    x = locals()
+    x['color'] = color[status]
+    return tm.render({**x, 'reset': Fore.RESET})
+
+
 def message_list(lst, level, tabs=4, status='none'):
     for l in lst:
         message_string(l, level=level, tabs=tabs, status=status)
